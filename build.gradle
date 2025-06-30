@@ -34,7 +34,3 @@ publishing {
         }
     }
 }
-
-tasks.withType(org.gradle.api.publish.tasks.GenerateModuleMetadata).configureEach {
-    suppressedValidations.add('dependencies-without-versions')
-}
