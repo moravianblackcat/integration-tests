@@ -2,6 +2,7 @@ package cz.dan.integrationtests.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @RequiredArgsConstructor
 @Component
 @ConditionalOnProperty("app.test.host")
+@EnableConfigurationProperties(HttpHelperConfigProperties.class)
 public class HttpHelper {
 
     private final HttpHelperConfigProperties configProperties;
