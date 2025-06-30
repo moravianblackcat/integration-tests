@@ -1,12 +1,10 @@
-package cz.dan.integrationtests.rest;
+package cz.dan.integrationtests.http;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
-@ConfigurationProperties("app.test")
-@Component
 @Data
+@ConfigurationProperties("app.test")
 public class HttpHelperConfigProperties {
 
     String host;

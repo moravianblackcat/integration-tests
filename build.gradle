@@ -6,13 +6,14 @@ plugins {
 }
 
 group = 'cz.dan'
-version = '2.0.1'
+version = '2.0.2'
 
 repositories {
     mavenCentral()
 }
 
 ext {
+    set('assertjVersion', '3.22.0')
     set('lombokVersion', '1.18.38')
 }
 
@@ -24,6 +25,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.kafka:spring-kafka'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }
 
 publishing {

@@ -1,0 +1,2 @@
+cz.dan.integrationtests.kafka.KafkaAutoConfiguration
+cz.dan.integrationtests.http.HttpAutoConfiguration

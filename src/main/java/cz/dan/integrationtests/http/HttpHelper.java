@@ -1,4 +1,4 @@
-package cz.dan.integrationtests.rest;
+package cz.dan.integrationtests.http;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
