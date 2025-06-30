@@ -6,14 +6,23 @@ plugins {
 }
 
 group = 'cz.dan'
-version = '1.0.1'
+version = '2.0.0'
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    set('lombokVersion', '1.18.38')
+}
+
 dependencies {
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.kafka:spring-kafka'
 }
 
