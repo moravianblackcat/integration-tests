@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @AutoConfiguration
-@ConditionalOnProperty(prefix = "app.test")
+@ConditionalOnProperty(name = "app.test.host")
 public class HttpAutoConfiguration {
 
     @Bean

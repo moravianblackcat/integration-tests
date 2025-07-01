@@ -24,7 +24,7 @@ class HttpAutoConfigurationTest {
     @Test
     void httpHelperConfigPropertiesBindsCustomProperties() {
         HttpHelperConfigProperties sut = context.getBeansOfType(HttpHelperConfigProperties.class)
-                .get("app.test-cz.dan.integrationtests.http.HttpHelperConfigProperties");
+                .get("httpHelperConfigProperties");
         assertThat(sut.getHost()).isEqualTo("localhost");
         assertThat(sut.getPort()).isEqualTo(8000);
     }

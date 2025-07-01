@@ -1,11 +1,8 @@
 package cz.dan.integrationtests.http;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -13,8 +10,6 @@ import java.net.URI;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @RequiredArgsConstructor
-@Component
-@EnableConfigurationProperties(HttpHelperConfigProperties.class)
 public class HttpHelper {
 
     private final HttpHelperConfigProperties configProperties;
