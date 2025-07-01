@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'cz.dan'
-version = '2.0.5'
+version = '3.0.0'
 
 repositories {
     mavenCentral()
@@ -14,6 +14,7 @@ repositories {
 
 ext {
     set('assertjVersion', '3.22.0')
+    set('cucumberVersion', '7.20.1')
     set('lombokVersion', '1.18.38')
 }
 
@@ -25,9 +26,16 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'io.cucumber:cucumber-java'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation "org.assertj:assertj-core:${assertjVersion}"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "io.cucumber:cucumber-bom:${cucumberVersion}"
+    }
 }
 
 tasks.named('test') {
