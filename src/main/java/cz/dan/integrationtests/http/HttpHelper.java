@@ -14,7 +14,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @RequiredArgsConstructor
 @Component
-@ConditionalOnProperty("app.test.host")
 @EnableConfigurationProperties(HttpHelperConfigProperties.class)
 public class HttpHelper {
 
