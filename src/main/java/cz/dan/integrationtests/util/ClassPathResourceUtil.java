@@ -30,8 +30,8 @@ public class ClassPathResourceUtil {
         }
     }
 
-    public <T> T getObjectFromJsonPath(String jsonPath, TypeReference<T> typeRef) throws IOException {
-        return objectMapper.readValue(new ClassPathResource(jsonPath).getFile(), typeRef);
+    public <T> T getObjectFromJsonPath(String jsonPath, Class<T> clazz) throws IOException {
+        return objectMapper.readValue(new ClassPathResource(jsonPath).getFile(), clazz);
     }
 
     public String getStringFromJsonPath(String jsonPath) {
