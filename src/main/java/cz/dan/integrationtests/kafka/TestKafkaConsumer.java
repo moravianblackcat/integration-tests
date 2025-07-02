@@ -20,11 +20,12 @@ public class TestKafkaConsumer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
+    @SuppressWarnings("unchecked")
     public <T> List<T> getNextMessagesFromTopicWithTimeout(int numberOfMessages, String topic,
                                                            int timeoutInSeconds) {
         Integer nextTopicOffset = topics.getOrDefault(topic, 0);
 
-        List<T> result = IntStream.range(0, numberOfMessages)
+        List<T> result = IntStream.range(nextTopicOffset, nextTopicOffset + numberOfMessages)
                 .mapToObj(offset ->
                         kafkaTemplate.receive(topic, 0, offset, Duration.of(timeoutInSeconds, SECONDS))
                                 .value())
@@ -34,6 +35,16 @@ public class TestKafkaConsumer {
         topics.put(topic, nextTopicOffset + numberOfMessages);
 
         return result;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T getNextMessageFromTopicWithTimeout(String topic, int timeoutInSeconds) {
+        Integer nextTopicOffset = topics.getOrDefault(topic, 0);
+
+        topics.put(topic, nextTopicOffset + 1);
+
+        return (T) kafkaTemplate.receive(topic, 0, nextTopicOffset, Duration.of(timeoutInSeconds, SECONDS)).value();
+
     }
 
 }
