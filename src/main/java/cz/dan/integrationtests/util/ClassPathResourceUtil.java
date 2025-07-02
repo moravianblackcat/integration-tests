@@ -1,6 +1,5 @@
 package cz.dan.integrationtests.util;
 
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +28,10 @@ public class ClassPathResourceUtil {
         } catch (IOException e) {
             throw new RuntimeException("Failed to read JSON as Map from path: " + jsonPath, e);
         }
+    }
+
+    public <T> T getObjectFromJsonPath(String jsonPath, TypeReference<T> typeRef) throws IOException {
+        return objectMapper.readValue(new ClassPathResource(jsonPath).getFile(), typeRef);
     }
 
     public String getStringFromJsonPath(String jsonPath) {
