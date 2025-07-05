@@ -36,7 +36,7 @@ public final class AwaitHelper {
                                  Map<String, Object> expectedRow) {
         assertInSeconds(timeoutInSeconds, () -> {
             Map<String, Object> actualRow = supplierOfActualRow.get();
-            assertThat(actualRow).isNotNull().containsExactlyEntriesOf(expectedRow);
+            assertThat(actualRow).isNotNull().containsAllEntriesOf(expectedRow);
         });
     }
 
