@@ -20,8 +20,15 @@ public class HttpAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(name = "httpHelper")
-    public HttpHelper httpHelper(HttpHelperConfigProperties httpHelperConfigProperties, RestTemplate restTemplate) {
-        return new HttpHelper(httpHelperConfigProperties, restTemplate);
+    public HttpHelper httpHelper(HttpHelperConfigProperties httpHelperConfigProperties,
+                                 HttpResponsesCache httpResponsesCache, RestTemplate restTemplate) {
+        return new HttpHelper(httpHelperConfigProperties, httpResponsesCache, restTemplate);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(name = "httpResponsesCache")
+    public HttpResponsesCache httpResponsesCache() {
+        return new HttpResponsesCache();
     }
 
 }

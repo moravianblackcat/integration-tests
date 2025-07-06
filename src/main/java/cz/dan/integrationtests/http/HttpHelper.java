@@ -10,6 +10,7 @@ import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -19,16 +20,32 @@ public class HttpHelper {
 
     private final HttpHelperConfigProperties configProperties;
 
+    private final HttpResponsesCache httpResponsesCache;
+
     private final RestTemplate restTemplate;
 
-    public Map<String, Object> get(String endpoint) {
+    public void getForArray(String endpoint) {
         URI uri = getUriBuilder(endpoint).build();
-        return performGet(uri);
+
+        httpResponsesCache.put(endpoint, performGetForArray(uri));
     }
 
-    public Map<String, Object> getWithQueryParams(String endpoint, Map<String, Object> queryParams) {
+    public void getForArrayWithQueryParams(String endpoint, Map<String, Object> queryParams) {
         URI uri = getUriBuilder(endpoint).queryParams(transform(queryParams)).build();
-        return performGet(uri);
+
+        httpResponsesCache.put(endpoint, performGetForArray(uri));
+    }
+
+    public void getForObject(String endpoint) {
+        URI uri = getUriBuilder(endpoint).build();
+
+        httpResponsesCache.put(endpoint, performGetForObject(uri));
+    }
+
+    public void getForObjectWithQueryParams(String endpoint, Map<String, Object> queryParams) {
+        URI uri = getUriBuilder(endpoint).queryParams(transform(queryParams)).build();
+
+        httpResponsesCache.put(endpoint, performGetForObject(uri));
     }
 
     public void postWithJsonRequestBody(String requestBody, String endpoint) {
@@ -40,9 +57,16 @@ public class HttpHelper {
         restTemplate.exchange(request, Void.class);
     }
 
-    private Map<String, Object> performGet(URI uri) {
+    private Map<String, Object> performGetForObject(URI uri) {
         RequestEntity<Void> request = RequestEntity.get(uri).accept(APPLICATION_JSON).build();
         ParameterizedTypeReference<Map<String, Object>> responseType = new ParameterizedTypeReference<>() {};
+
+        return restTemplate.exchange(request, responseType).getBody();
+    }
+
+    private List<Map<String, Object>> performGetForArray(URI uri) {
+        RequestEntity<Void> request = RequestEntity.get(uri).accept(APPLICATION_JSON).build();
+        ParameterizedTypeReference<List<Map<String, Object>>> responseType = new ParameterizedTypeReference<>() {};
 
         return restTemplate.exchange(request, responseType).getBody();
     }
