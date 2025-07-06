@@ -12,6 +12,11 @@ public class RestSteps {
 
     private final HttpHelper httpHelper;
 
+    @When("GET request to {}")
+    public void getRequestTo(String endpoint) {
+        httpHelper.get(endpoint);
+    }
+
     @When("I send GET request to {} with query parameters from {}")
     public void getRequestToWithQueryParams(String endpoint, String queryParamsJsonPath) {
         httpHelper.getWithQueryParams(endpoint, classPathResourceUtil.getMapFromJsonPath(queryParamsJsonPath));
