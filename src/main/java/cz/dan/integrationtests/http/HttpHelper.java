@@ -21,12 +21,14 @@ public class HttpHelper {
 
     private final RestTemplate restTemplate;
 
+    public Map<String, Object> get(String endpoint) {
+        URI uri = getUriBuilder(endpoint).build();
+        return performGet(uri);
+    }
+
     public Map<String, Object> getWithQueryParams(String endpoint, Map<String, Object> queryParams) {
         URI uri = getUriBuilder(endpoint).queryParams(transform(queryParams)).build();
-        RequestEntity<Void> request = RequestEntity.get(uri).accept(APPLICATION_JSON).build();
-        ParameterizedTypeReference<Map<String, Object>> responseType = new ParameterizedTypeReference<>() {};
-
-        return restTemplate.exchange(request, responseType).getBody();
+        return performGet(uri);
     }
 
     public void postWithJsonRequestBody(String requestBody, String endpoint) {
@@ -36,6 +38,13 @@ public class HttpHelper {
                 .contentType(APPLICATION_JSON)
                 .body(requestBody);
         restTemplate.exchange(request, Void.class);
+    }
+
+    private Map<String, Object> performGet(URI uri) {
+        RequestEntity<Void> request = RequestEntity.get(uri).accept(APPLICATION_JSON).build();
+        ParameterizedTypeReference<Map<String, Object>> responseType = new ParameterizedTypeReference<>() {};
+
+        return restTemplate.exchange(request, responseType).getBody();
     }
 
     private UriBuilder getUriBuilder(String endpoint) {
