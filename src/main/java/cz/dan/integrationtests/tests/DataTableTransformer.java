@@ -1,5 +1,7 @@
 package cz.dan.integrationtests.tests;
 
+import io.cucumber.java.DataTableType;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.Map;
 
 public class DataTableTransformer {
 
+    @DataTableType
     public Map<String, Object> transform(Map<String, String> entry) {
         Map<String, Object> transformedEntry = new HashMap<>();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
