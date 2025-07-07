@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'cz.dan'
-version = '4.2.2'
+version = '5.0.0'
 
 repositories {
     mavenCentral()
